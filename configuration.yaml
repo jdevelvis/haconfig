@@ -1,0 +1,158 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 266
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  time_zone: America/New_York
+  customize: !include includes/customize.yaml
+
+###############
+# The Basics
+###############
+
+# Show links to resources in log and frontend
+#introduction:
+# Enables the frontend
+frontend:
+config:
+http:
+  api_password: !secret hass_password
+#  server_host: 127.0.0.1
+  trusted_networks:
+    - 127.0.0.1
+    - 192.168.0.0/24
+#  login_attempts_threshold: 5
+
+# Checks for available updates
+updater:
+# Discover some devices automatically
+discovery:
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+# Enables support for tracking state changes over time.
+history:
+# View all events in a logbook
+#logbook:
+# Record Events
+#recorder:
+#  purge_days: 7
+# Track the sun
+sun:
+# Enable ffmpeg usage
+ffmpeg:
+  ffmpeg_bin: /usr/bin/avconv
+
+#################
+# Platforms
+#################
+
+# ZWave
+zwave:
+  usb_path: /dev/zwave
+  config_path: /usr/local/lib/python3.4/dist-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
+#  polling_interval: 5
+
+# Nest
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+climate:
+    platform: nest
+#fan:
+#    platform: nest
+
+# Internal MQTT Broker
+#mqtt:
+#  broker: m13.cloudmqtt.com
+#  port: 31590
+#  username: !secret cloudmqtt_user
+#  password: !secret cloudmqtt_pass
+
+
+# Google
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+
+# Wemo
+wemo:
+
+#device_tracker:
+#  - platform: icloud
+#    username: !secret icloud_user
+#    password: !secret icloud_pass
+
+#########
+# ZONES #
+#########
+zone 1:
+  name: Neighborhood
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  radius: 200
+  icon: mdi:home
+
+zone 2:
+  name: Jason's Work
+  latitude: !secret work_lat
+  longitude: !secret work_long
+  radius: 500
+  icon: mdi:briefcase
+
+zone 3:
+  name: Downtown
+  latitude: !secret downtown_lat
+  longitude: !secret downtown_long
+  radius: 1250
+  icon: mdi:city
+
+zone 4:
+  name: Church
+  latitude: !secret church_lat
+  longitude: !secret church_long
+  radius: 500
+  icon: mdi:church
+
+
+############
+# INCLUDES #
+############
+automation: !include includes/automation.yaml
+group: !include includes/groups.yaml
+sensor: !include includes/sensors.yaml
+binary_sensor: !include includes/binary_sensors.yaml
+cover: !include includes/covers.yaml
+#device_tracker: !include includes/device_trackers.yaml
+media_player: !include includes/media_players.yaml
+scene: !include includes/scenes.yaml
+#notify: !include includes/notify.yaml
+#script: !include includes/scripts.yaml
+#camera: !include includes/cameras.yaml
+
+#alexa:
+#  intents: !include_dir_merge_named includes/alexa
+
+#################
+# Custom Panels #
+#################
+#panel_custom:
+#  - name: touchcontrol
+#    sidebar_title: Touch Panel
+#    sidebar_icon: mdi:work
+#    url_path: touchcontrol
+#    config:
+#      title: Touch Control
+
+##################################
+# Restart Homebridge on HASS start
+##################################
+shell_command:
+  restart_homebridge: 'sudo systemctl restart homebridge'
+  start_homebridge: 'sudo systemctl start homebridge'
+  stop_homebridge: 'sudo systemctl stop homebridge'
