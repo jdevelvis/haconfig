@@ -1,0 +1,149 @@
+#ZWave Devices
+     sensor.aeotec_dsc06106_smart_energy_switch_energy_19_0:
+        icon: mdi:flash
+        friendly_name: Smart Energy Usage
+        homebridge_hidden: true
+     switch.aeotec_dsc06106_smart_energy_switch_switch_19_0:
+        icon: mdi:lightbulb
+        friendly_name: Smart Energy Switch
+        homebridge_name: Smart Energy Switch
+     light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_25_0:
+        icon: mdi:toggle-switch
+        friendly_name: Dimmer
+        homebridge_name: Dimmer
+     switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_26_0:
+        icon: mdi:lightbulb
+        friendly_name: Lights
+        homebridge_name: Lights
+     switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_14_0:
+        icon: mdi:lightbulb
+        friendly_name: Light
+        homebridge_name: Light
+     switch.ge_45605_duplex_receptacle_switch_23_0:
+        icon: mdi:power-plug
+        friendly_name: C's Outlet
+        homebridge_name: C's Outlet
+     switch.ge_45605_duplex_receptacle_switch_12_0:
+        icon: mdi:power-plug
+        friendly_name: Outlet Under The TV
+        homebridge_name: Outlet Under The TV
+     binary_sensor.__sensor_20_0:
+        icon: mdi:water
+        sensor_class: moisture
+        friendly_name: Water Sensor
+        homebridge_name: Water Sensor
+     switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_22_0:
+        icon: mdi:lightbulb
+        friendly_name: Master Light
+        homebridge_name: Master Light
+     switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_24_0:
+        icon: mdi:lightbulb
+        friendly_name: M's Light
+        homebridge_name: M's Light
+     light.__level_27_0:
+        icon: mdi:toggle-switch
+        friendly_name: Dimmer
+        homebridge_name: Basement Dimmer
+
+     binary_sensor.__sensor_3_0:
+        hidden: true
+     binary_sensor.__sensor_15_0:
+        hidden: true
+
+     sensor.kitchen_thermostat_humidity:
+        hidden: true
+     sensor.kitchen_thermostat_operation_mode:
+        hidden: true
+     sensor.kitchen_thermostat_target:
+        hidden: true
+     sensor.kitchen_thermostat_temperature:
+        hidden: true
+
+#Wemo
+     switch.carters_room_light:
+        icon: mdi:lightbulb
+        friendly_name: C's Light
+        homebridge_name: C's Light
+
+#covers
+     cover.garage_door:
+        homebridge_cover_type: garage_door
+        friendly_name: Garage Door
+        icon: mdi:garage
+
+#Nest
+     climate.kitchen:
+        icon: mdi:nest-thermostat
+        friendly_name: Thermostat
+     sensor.living_room_nest_protect_smoke_status:
+        icon: mdi:alert
+        friendly_name: Living Room Smoke
+        homebridge_name: Living Room Smoke
+     sensor.living_room_nest_protect_co_status:
+        icon: mdi:alert
+        friendly_name: Living Room CO
+        homebridge_name: Living Room CO
+     sensor.upstairs_nest_protect_smoke_status:
+        icon: mdi:alert
+        friendly_name: Upstairs Smoke
+        homebridge_name: Upstairs Smoke
+     sensor.upstairs_nest_protect_co_status:
+        icon: mdi:alert
+        friendly_name: Upstairs CO
+        homebridge_name: Upstairs CO
+     sensor.basement_nest_protect_smoke_status:
+        icon: mdi:alert
+        friendly_name: Basement Smoke
+        homebridge_name: Basement Smoke
+     sensor.basement_nest_protect_co_status:
+        icon: mdi:alert
+        friendly_name: Basement CO
+        homebridge_name: Basement CO
+
+#Dark Sky
+     sensor.dark_sky_daily_high_temperature:
+        icon: mdi:thermometer-lines
+        friendly_name: Today's High
+        homebridge_hidden: true
+     sensor.dark_sky_daily_low_temperature:
+        icon: mdi:thermometer-lines
+        friendly_name: Today's Low
+        homebridge_hidden: true
+     sensor.dark_sky_temperature:
+        icon: mdi:thermometer-lines
+        friendly_name: Current Temp
+        homebridge_hidden: true
+
+#Speedtest.net
+     sensor.speedtest_upload:
+        icon: mdi:speedometer
+        friendly_name: Upload
+        homebridge_hidden: true
+     sensor.speedtest_download:
+        icon: mdi:speedometer
+        friendly_name: Download
+        homebridge_hidden: true
+     sensor.speedtest_ping:
+        icon: mdi:speedometer
+        friendly_name: Ping
+        homebridge_hidden: true
+
+#Plex
+     media_player.apple_tv:
+        friendly_name: Apple TV
+        homebridge_hidden: true
+     media_player.jdiphone_2:
+        friendly_name: Jason's iPhone
+        homebridge_hidden: true
+     media_player.jasons_ipad:
+        friendly_name: iPad Mini
+        homebridge_hidden: true
+     media_player.allisons_ipad:
+        friendly_name: Allison's iPad
+        homebridge_hidden: true
+     media_player.allisons_ipad_2:
+        friendly_name: iPad 2
+        homebridge_hidden: true
+     media_player.allisonsiphone2:
+        friendly_name: Allison's iPhone
+        homebridge_hidden: true

@@ -1,0 +1,64 @@
+  - platform: google_travel_time
+    api_key: !secret google_travel_time_api_key
+    origin: !secret google_travel_origin
+    destination: !secret google_travel_destination
+
+  - platform: plex
+
+# Weather Prediction
+  - platform: darksky
+    api_key: !secret darksky_key
+    monitored_conditions:
+#      - summary
+#      - icon
+#      - nearest_storm_distance
+#      - nearest_storm_bearing
+#      - precip_type
+#      - precip_intensity
+#      - precip_probability
+      - temperature
+#      - apparent_temperature
+#      - dew_point
+#      - wind_speed
+#      - wind_bearing
+#      - cloud_cover
+#      - humidity
+#      - pressure
+#      - visibility
+#      - ozone
+#      - minutely_summary
+#      - hourly_summary
+#      - daily_summary
+      - temperature_max
+      - temperature_min
+#      - apparent_temperature_max
+#      - apparent_temperature_min
+#      - precip_intensity_max
+
+  - platform: speedtest
+    minute: 30
+    hour:
+      - 0
+      - 6
+      - 12
+      - 18
+    monitored_conditions:
+      - download
+      - upload
+      - ping
+
+#Date & time
+  - platform: time_date
+    display_options:
+      - "date_time"
+
+#Nest
+  - platform: nest
+    monitored_conditions:
+      - 'temperature'
+      - 'target'
+      - 'co_status'
+      - 'smoke_status'
+      - 'battery_health'
+
+#Calendars

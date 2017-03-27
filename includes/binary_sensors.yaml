@@ -1,0 +1,36 @@
+  - platform: template
+    sensors:
+
+#combined CO detectors
+      nest_co:
+        friendly_name: 'CO'
+        device_class: 'gas'
+        value_template: >-
+          {%- if is_state("sensor.basement_nest_protect_co_status", "Ok")
+              and is_state("sensor.living_room_nest_protect_co_status", "Ok")
+              and is_state("sensor.upstairs_nest_protect_co_status", "Ok") -%}
+          Off
+          {%- else -%}
+          On
+          {%- endif %}
+        entity_id:
+          - sensor.basement_nest_protect_co_status
+          - sensor.living_room_nest_protect_co_status
+          - sensor.upstairs_nest_protect_co_status
+
+#combined smoke detectors
+      nest_smoke:
+        friendly_name: 'Smoke'
+        device_class: 'smoke'
+        value_template: >-
+          {%- if is_state("sensor.basement_nest_protect_smoke_status", "Ok")
+              and is_state("sensor.living_room_nest_protect_smoke_status", "Ok")
+              and is_state("sensor.upstairs_nest_protect_smoke_status", "Ok") -%}
+          Off
+          {%- else -%}
+          On
+          {%- endif %}
+        entity_id:
+          - sensor.basement_nest_protect_smoke_status
+          - sensor.living_room_nest_protect_smoke_status
+          - sensor.upstairs_nest_protect_smoke_status

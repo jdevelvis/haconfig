@@ -1,0 +1,206 @@
+# Ideas
+# - Turn on kitchen light when garage door opens after sunset
+# - Automatically turn off kids lights at bedtime?
+#   (Could be great for reading time cutoff)
+# - Switch that controls all automation (full stop)
+#   - See Bruh Automation's example: https://github.com/bruhautomation/BRUH3-Home-Assistant-Configuration/blob/master/automations/media/a_media_paused_night.yaml
+# - After 8pm, turn on & off kitchen lights with Apple TV playing
+#   - Need presence detection for this one, what if someone is in the kitchen?
+# - Turn on & off the same lights (living room & kitchen) when Plex plays on the Apple TV
+# - Push notifications to Plex?
+#   - Maybe for when the kids get out of bed once the occupancy sensors are in place?
+# - Notify when Washing Machine or Dryer is finished?
+#   - Would need some kind of sensor (sound or vibration) in the room
+# - Commute Delay notification
+# - Occupancy
+#   - Wasp in a box?
+
+# Example using for:
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.frontdoorswitch_sensor_3_0
+#    state: 'on'
+#    for:
+#      minutes: 3
+
+
+#########################
+# Switch based automation
+#########################
+  - alias: Turn on front room outlet when switch is turned on
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_26_0
+      state: 'on'
+    action:
+      service: switch.turn_on
+      entity_id: switch.ge_45605_duplex_receptacle_switch_12_0
+
+  - alias: Turn off front room outlet when switch is turned off
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_26_0
+      state: 'off'
+    action:
+      service: switch.turn_off
+      entity_id: switch.ge_45605_duplex_receptacle_switch_12_0
+
+
+#Apple TV turns off living room Lights when playing
+  - alias: Turn off living room lights when Apple TV is playing
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: media_player.apple_tv
+      from: 'paused'
+      to: 'playing'
+    action:
+      service: scene.turn_on
+      entity_id:
+        - scene.tv_time
+
+#Apple TV turns on living room Lights when it stops playing
+  - alias: Turn on living room lights when Apple TV is paused after sunset
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: media_player.apple_tv
+      from: 'playing'
+      to: 'paused'
+    condition:
+      condition: sun
+      after: sunset
+      after_offset: "00:30:00"
+    action:
+      service: scene.turn_on
+      entity_id:
+        - scene.tv_time_is_over
+
+#######################
+# Sun based automation
+#######################
+
+### Turn on the patio light each night when the sun sets
+  - alias: Turn on light when sun sets
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      service: switch.turn_on
+      entity_id: switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_14_0
+
+### Turn off the patio light each morning when the sun rises
+  - alias: Turn off light when sun rises
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: sun
+      event: sunrise
+    action:
+      service: switch.turn_off
+      entity_id: switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_14_0
+
+########################
+# Time Based automation
+########################
+
+#Kitchen Light Convenience
+  - alias: Turn on Kitchen dimmer at 6 am
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: time
+      after: '06:00:00'
+    action:
+      service: scene.turn_on
+      entity_id: scene.good_morning
+  - alias: Turn Kitchen dimmer to 100 at 7:30am
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: time
+      after: '07:30:00'
+    action:
+      service: scene.turn_on
+      entity_id: scene.turn_it_up
+
+#Bedroom light energy savings
+  - alias: Turn off bedroom lights at 8:45am
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: time
+      after: '08:45:00'
+    action:
+      service: switch.turn_off
+      entity_id: group.bedrooms
+
+########################
+# Garage Automation
+########################
+
+# Make sure the garage door stays closed at night
+# Got this automation from https://github.com/cbulock/home-assistant-configs/blob/master/automation/garage/remain_closed_overnight.yaml
+  - alias: Ensure Garage Door Stays Closed at Night
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: cover.garage_door
+      to: 'open'
+      for:
+        minutes: 10
+    condition:
+      condition: sun
+      after: sunset
+    action:
+      - service: cover.close
+        data:
+          entity_id: cover.garage_door
+
+#Turn on the kitchen light when the garage door opens at night
+  - alias: Turn on kitchen light when garage door opens at night
+    initial_state: True
+    hide_entity: False
+    trigger:
+      platform: state
+      entity_id: cover.garage_door
+      to: 'open'
+    condition:
+      condition: or
+      conditions:
+        - condition: sun
+          before: sunrise
+        - condition: sun
+          after: sunset
+    action:
+      service: light.turn_on
+      entity_id: light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_25_0
+
+########################
+# Z-wave heal automation
+########################
+
+#This automation was removed due to unforseen breakage of the zwave network
+### Heal the z-wave network every night
+#  - alias: soft reset at 2:30am
+#    trigger:
+#      platform: time
+#      after: '2:30:00'
+#    action:
+#      service: zwave.soft_reset
+
+#  - alias: heal at 2:31am
+#    trigger:
+#      platform: time
+#      after: '2:31:00'
+#    action:
+#      service: zwave.heal_network

@@ -1,0 +1,17 @@
+#Plex control
+  - platform: plex
+
+#Chromecast
+  - platform: cast
+
+#Apple TV
+  - platform: apple_tv
+    host: 192.168.0.104
+    login_id: !secret atv_login_id
+
+#Pioneer Receiver
+##NOT Working yet! Need to check config (ip, port, more?) & options
+#  - platform: pioneer
+#    host: 192.168.0.109
+#    name: Pioneer Receiver
+#    port: 23

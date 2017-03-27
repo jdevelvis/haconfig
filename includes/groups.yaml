@@ -1,0 +1,233 @@
+#####################
+# Views
+#####################
+#default_view:
+# view: yes
+test: #remove this when you want to reset the default_view
+ entities:
+   - group.living_room_with_media
+   - group.kitchen
+   - group.bedrooms
+   - group.garage
+   - group.environment
+   - group.thermostat
+   - binary_sensor.co
+   - binary_sensor.smoke
+   - binary_sensor.__sensor_20_0
+   - device_tracker.allisonsiphone
+   - device_tracker.jdiphone2
+
+first_floor_view:
+  name: Main Floor
+  view: yes
+  icon: mdi:home-variant
+  entities:
+    - group.living_room
+    - group.kitchen
+    - group.front_porch
+    - group.back_patio
+    - group.thermostat
+
+living_room_view:
+  name: Living Room
+  view: no
+  entities:
+    - group.living_room
+
+kitchen_view:
+  name: Kitchen
+  view: no
+  entities:
+    - group.kitchen
+    - group.thermostat
+
+bedrooms_view:
+  name: Second Floor
+  view: yes
+  icon: mdi:hotel
+  entities:
+    - group.bedrooms
+
+garage_view:
+   name: Garage
+   view: yes
+   icon: mdi:garage
+   entities:
+     - group.garage
+
+outside_view:
+  name: Outside
+  view: no
+  entities:
+    - group.front_porch
+    - group.back_patio
+
+back_patio_view:
+  name: Back Patio
+  view: no
+  entities:
+    - group.back_patio
+
+front_porch_view:
+  name: Front Porch
+  view: no
+  entities:
+    - group.front_porch
+
+basement_view:
+  name: Basement
+  view: no
+  icon: mdi:stairs
+  entities:
+    - group.basement
+
+media_view:
+  name: Media
+  view: yes
+  icon: mdi:airplay
+  entities:
+    - group.media
+
+control_panel_view:
+  name: Control Panel
+  view: yes
+  icon: mdi:apps
+  entities:
+    - group.bedrooms
+    - group.front_porch
+    - group.back_patio
+    - group.garage
+    - group.living_room
+    - group.kitchen
+#    - group.sensors
+    - binary_sensor.co
+    - binary_sensor.smoke
+    - device_tracker.jdiphone2
+    - device_tracker.allisonsiphone
+    - sensor.google_travel_time__driving
+    - binary_sensor.__sensor_20_0
+
+automation_view:
+  name: automation
+  view: yes
+  icon: mdi:auto-fix
+  entities:
+    - group.sun_automation
+    - group.time_automation
+    - group.switch_automation
+    - group.media_automation
+
+other_view:
+  name: Other
+  view: yes
+  icon: mdi:dots-horizontal
+  entities:
+    - group.environment
+    - group.energy
+    - group.connectivity
+
+##################
+# Groups
+##################
+
+Living Room:
+  - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_26_0
+  - switch.ge_45605_duplex_receptacle_switch_12_0
+
+Living Room With Apple TV:
+  - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_26_0
+  - switch.ge_45605_duplex_receptacle_switch_12_0
+  - media_player.apple_tv
+
+Bedrooms:
+  - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_22_0
+  - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_24_0
+  - switch.carters_room_light
+  - switch.ge_45605_duplex_receptacle_switch_23_0
+
+Garage:
+  - cover.garage_door
+
+Back Patio:
+  - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_14_0
+
+Front Porch:
+  - switch.aeotec_dsc06106_smart_energy_switch_switch_19_0
+
+Thermostat:
+  - climate.kitchen
+
+Kitchen:
+  - light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_25_0
+
+Sensors:
+    - sensor.upstairs_nest_protect_smoke_status
+    - sensor.upstairs_nest_protect_co_status
+    - sensor.living_room_nest_protect_smoke_status
+    - sensor.living_room_nest_protect_co_status
+    - sensor.basement_nest_protect_smoke_status
+    - sensor.basement_nest_protect_co_status
+    - binary_sensor.__sensor_20_0
+
+Basement:
+    - binary_sensor.__sensor_20_0
+
+Media:
+    - media_player.apple_tv
+    - media_player.jdiphone_2
+    - media_player.jasons_ipad
+    - media_player.allisons_ipad
+    - media_player.allisons_ipad_2
+    - media_player.allisonsiphone2
+
+Environment:
+    - sensor.dark_sky_temperature
+    - sun.sun
+    - sensor.dark_sky_daily_high_temperature
+    - sensor.dark_sky_daily_low_temperature
+
+Energy:
+  - sensor.pluggable_energy
+
+Connectivity:
+  - sensor.speedtest_download
+  - sensor.speedtest_upload
+  - sensor.speedtest_ping
+
+Nighttime Lights:
+  - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_14_0
+
+#Device Trackers
+Cell Phones:
+  - device_tracker.jdiphone2
+  - device_tracker.allisonsiphone
+
+Other Apple Devices:
+  - device_tracker.allisonsapple_watch
+  - device_tracker.allisonsipad
+  - device_tracker.allisonsmacbookair
+  - device_tracker.jasonsapple_watch
+  - device_tracker.jasonsipad
+  - device_tracker.jasonsmacbookpro
+
+#Automation Groups
+Sun Automation:
+  - automation.turn_on_light_when_sun_sets
+  - automation.turn_off_light_when_sun_rises
+
+Time Automation:
+  - automation.turn_on_kitchen_dimmer_at_6_am
+  - automation.turn_kitchen_dimmer_to_100_at_730am
+  - automation.turn_off_bedroom_lights_at_845am
+
+Garage Automation:
+  - automation.ensure_garage_door_stays_closed_at_night
+  - automation.turn_on_kitchen_light_when_garage_door_opens_at_night
+
+Switch Automation:
+  - automation.turn_on_front_room_outlet_when_switch_is_turned_on
+  - automation.turn_off_front_room_outlet_when_switch_is_turned_off
+
+Media Automation:
+  - automation.turn_on_living_room_lights_when_apple_tv_is_paused_after_sunset
+  - automation.turn_off_living_room_lights_when_apple_tv_is_playing

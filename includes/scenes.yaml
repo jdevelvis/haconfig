@@ -1,0 +1,21 @@
+  - name: TV Time
+    entities:
+        switch.ge_45605_duplex_receptacle_switch_12_0: off
+        switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_26_0: off
+
+  - name: TV Time Is Over
+    entities:
+        switch.ge_45605_duplex_receptacle_switch_12_0: on
+        switch.aeotec_dsc26103_micro_switch_2nd_edition_switch_26_0: on
+
+  - name: Good morning
+    entities:
+        light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_25_0:
+          state: on
+          brightness: 150
+
+  - name: Turn it up
+    entities:
+        light.aeotec_dsc27103_micro_dimmer_2nd_edition_level_25_0:
+          state: on
+          brightness: 255

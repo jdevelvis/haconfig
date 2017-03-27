@@ -1,0 +1,5 @@
+  - platform: rpi_gpio
+    covers:
+      - relay_pin: 12
+        state_pin: 17
+        name: Garage Door
